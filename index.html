@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - Telecom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navegacao">
+        <nav class="menu">
+            <div class="imagem">
+                <img src="https://logowik.com/content/uploads/images/telecom-argentina6850.logowik.com.webp" alt="logotipo">
+            </div>
+            <div class="menu-links">  
+                <p><a href="#home">Home</a></p>
+                <p><a href="#planos">Planos</a></p>
+                <p><a href="#contato">Contato</a></p>
+            </div>
+        </nav>
+    </header>
+
+    <main>  
+        <section class="home" id="home">  
+            <h1>🚀 Internet Rápida e Estável</h1>  
+            <p class="destaque">Planos de 500MB a 1GB</p>
+            <button class="btn-assinar">Assine Agora</button>
+        </section>
+
+        <section class="planos" id="planos">  
+            <h2>Nossos Planos</h2>  
+            <div class="cards">
+                <div class="card">  
+                    <h3>500 MB</h3>
+                    <p class="preco">R$ 99</p>
+
+                    <div class="beneficios">
+                        <p>✅ 500MB de velocidade</p>
+                        <p>✅ Suporte 24h</p>
+                        <p>✅ Wi-Fi 6</p>
+                    </div>
+
+                    <button class="btn-plano">Assinar</button>
+                </div>
+
+                <div class="card destaque">  
+                    <h3>700 MB</h3>
+                    <p class="preco">R$ 129</p>
+
+                    <div class="beneficios">
+                        <p>✅ 700MB de velocidade</p>
+                        <p>✅ Suporte 24h</p>
+                        <p>✅ Wi-Fi 6</p>
+                        <p>✅ Roteador grátis</p>
+                    </div>
+
+                    <button class="btn-plano">Assinar</button>
+                </div>
+
+                <div class="card">
+                    <h3>1 GB</h3>
+                    <p class="preco">R$ 159</p>
+
+                    <div class="beneficios">
+                        <p>✅ 1GB de velocidade</p>
+                        <p>✅ Suporte 24h prioritário</p>
+                        <p>✅ Wi-Fi 6</p>
+                        <p>✅ Roteador grátis</p>
+                        <p>✅ Streaming incluso</p>
+                    </div>
+
+                    <button class="btn-plano">Assinar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="contato" id="contato">
+    <h2>Fale Conosco</h2>
+    <form action="#" id="formContato">
+        <input type="text" id="nome" placeholder="Seu nome" required>
+        <input type="email" id="email" placeholder="Seu email" required>
+        <input type="tel" id="telefone" placeholder="Seu número" required>
+        <textarea id="mensagem" placeholder="Sua mensagem" rows="4" required></textarea>
+        <button type="submit">Enviar Mensagem</button>
+        <button type="button" id="btnLimpar" class="btn-limpar">🗑️ Limpar Dados Salvos</button>
+    </form>
+    </section>
+
+
+    <footer class="rodape" id="contato">
+
+        <div class="footer-content">
+        <p>📞 Contato: (11) 99999-9999</p>
+        <p>✉️ contato@telecom.com</p>
+
+        <div class="redes-sociais">
+            <h4>Redes Sociais</h4>
+            <div class="links-sociais"></div>
+            <a href="#">📱</a>
+            <a href="#">📧</a>
+            <a href="#">🌐</a>
+        </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>© 2026 Telecom - Todos os direitos reservados</p>
+    </div>
+
+    <div id="meuModal" class="modal">
+    <div class="modal-conteudo">
+        <span class="modal-fechar">&times;</span>
+        <p id="modalMensagem"></p>
+        <button id="modalBtnFechar">Fechar</button>
+    </div>
+</div>
+
+    <script>
+    const modal = document.getElementById('meuModal');
+    const modalMensagem = document.getElementById('modalMensagem');
+    const fecharX = document.querySelector('.modal-fechar');
+    const fecharBtn = document.getElementById('modalBtnFechar');
+    
+    function mostrarModal(texto) {
+        modalMensagem.innerHTML = texto;
+        modal.style.display = 'block';
+    }
+    
+    function fecharModal() {
+        modal.style.display = 'none';
+    }
+    
+    if (fecharX) fecharX.onclick = fecharModal;
+    if (fecharBtn) fecharBtn.onclick = fecharModal;
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            fecharModal();
+        }
+    }
+    
+    const btnAssinar = document.querySelector('.btn-assinar');
+    if (btnAssinar) {
+        btnAssinar.onclick = function() {
+            mostrarModal('🎉 Obrigado pelo interesse! Em breve um consultor entrará em contato.');
+        }
+    }
+    
+    const botoesPlano = document.querySelectorAll('.btn-plano');
+    for (let i = 0; i < botoesPlano.length; i++) {
+        botoesPlano[i].onclick = function(event) {
+            let card = event.target.closest('.card');
+            let plano = card.querySelector('h3').innerText;
+            mostrarModal('📡 Você escolheu o plano ' + plano + '! Entre em contato para ativação.');
+        }
+    }
+    
+    const nomeInput = document.getElementById('nome');
+    const emailInput = document.getElementById('email');
+    const telefoneInput = document.getElementById('telefone');
+    const mensagemInput = document.getElementById('mensagem');
+    const btnLimpar = document.getElementById('btnLimpar');
+    
+    function carregarDadosSalvos() {
+        const nomeSalvo = localStorage.getItem('contato_nome');
+        const emailSalvo = localStorage.getItem('contato_email');
+        const telefoneSalvo = localStorage.getItem('contato_telefone');
+        const mensagemSalva = localStorage.getItem('contato_mensagem');
+        
+        if (nomeSalvo) nomeInput.value = nomeSalvo;
+        if (emailSalvo) emailInput.value = emailSalvo;
+        if (telefoneSalvo) telefoneInput.value = telefoneSalvo;
+        if (mensagemSalva) mensagemInput.value = mensagemSalva;
+    }
+    
+    function salvarDados() {
+        localStorage.setItem('contato_nome', nomeInput.value);
+        localStorage.setItem('contato_email', emailInput.value);
+        localStorage.setItem('contato_telefone', telefoneInput.value);
+        localStorage.setItem('contato_mensagem', mensagemInput.value);
+    }
+    
+    function limparDadosSalvos() {
+        localStorage.removeItem('contato_nome');
+        localStorage.removeItem('contato_email');
+        localStorage.removeItem('contato_telefone');
+        localStorage.removeItem('contato_mensagem');
+        
+        nomeInput.value = '';
+        emailInput.value = '';
+        telefoneInput.value = '';
+        mensagemInput.value = '';
+        
+        mostrarModal('🗑️ Dados salvos foram apagados com sucesso!');
+    }
+    
+    if (nomeInput) {
+        carregarDadosSalvos();
+        nomeInput.addEventListener('input', salvarDados);
+        emailInput.addEventListener('input', salvarDados);
+        telefoneInput.addEventListener('input', salvarDados);
+        mensagemInput.addEventListener('input', salvarDados);
+    }
+    
+    if (btnLimpar) {
+        btnLimpar.onclick = limparDadosSalvos;
+    }
+    
+    const form = document.getElementById('formContato');
+    if (form) {
+        form.onsubmit = function(event) {
+            event.preventDefault();
+            
+            const nome = nomeInput.value;
+            const email = emailInput.value;
+            const telefone = telefoneInput.value;
+            const msg = mensagemInput.value;
+            
+            if (nome === '' || email === '' || telefone === '' || msg === '') {
+                mostrarModal('⚠️ Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            salvarDados();
+            
+            mostrarModal('✅ Mensagem enviada com sucesso, ' + nome + '! Responderemos em até 24h.');
+            
+            form.reset();
+            limparDadosSalvos();
+        }
+    }
+    
+    const linksMenu = document.querySelectorAll('.menu-links a');
+    for (let i = 0; i < linksMenu.length; i++) {
+        linksMenu[i].onclick = function(event) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '') return;
+            
+            const destino = document.querySelector(href);
+            if (destino) {
+                event.preventDefault();
+                destino.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+</script>
+
+
+
+</body>
+</html>
