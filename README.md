@@ -1,7 +1,5 @@
 # 📡 Landing Page - Telecom Rápida
 
-![Preview do projeto](https://via.placeholder.com/800x400?text=Landing+Page+Telecom)
-
 Landing page institucional desenvolvida para uma provedora de internet fictícia. Projeto criado durante meus estudos de HTML, CSS e JavaScript.
 
 ## 🔗 Demonstração
